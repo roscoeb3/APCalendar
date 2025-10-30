@@ -19,7 +19,7 @@ public class APCalendar {
     /** Returns the value representing the day of the week for the first day of year,
      * where 0 denotes Sunday, 1 denotes Monday, ..., and 6 denotes Saturday.
      */
-    public static int firstDayOfYear(int year) {
+    private static int firstDayOfYear(int year) {
         int x = Math.abs(year - 1899);
         for (int i = 1900; i < year; i++) if (isLeapYear(i)) x++;
         return (x % 7);
@@ -29,7 +29,7 @@ public class APCalendar {
      * Returns 1 for January 1 (month = 1, day = 1) of any year.
      * Precondition: The date represented by month, day, year is a valid date.
      */
-    public static int dayOfYear(int month, int day, int year) {
+    private static int dayOfYear(int month, int day, int year) {
         int count = 0;
         for(int i = 1; i < month; i++) {
             if (i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10) count += 31;
@@ -45,8 +45,9 @@ public class APCalendar {
      * and 6 denotes Saturday.
      * Precondition: The date represented by month, day, year is a valid date.
      */
-    public static int dayOfWeek(int month, int day, int year)
-    { return 0; }
+    public static int dayOfWeek(int month, int day, int year) {
+        return (firstDayOfYear(year) + dayOfYear(month, day, year) - 1) % 7;
+    }
 
 // There may be instance variables, constructors, and other methods not shown.
 }
